@@ -15,7 +15,7 @@ jobs:
       run:
         shell: bash
     name: Terraform Plan Simulation
-    runs-on: ci
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -48,11 +48,11 @@ jobs:
     defaults:
       run:
         shell: bash
-        
+
     name: Terraform Apply Simulation
     needs:
       - terraform-plan
-    runs-on: ci
+    runs-on: ubuntu-latest
 
     # THIS CREATES THE MANUAL APPROVAL GATE
 
