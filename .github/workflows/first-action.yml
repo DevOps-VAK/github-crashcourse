@@ -11,6 +11,9 @@ jobs:
 ####################################################
 
   terraform-plan:
+    defaults:
+      run:
+        shell: bash
     name: Terraform Plan Simulation
     runs-on: ci
     steps:
@@ -42,6 +45,10 @@ jobs:
 ####################################################
 
   terraform-apply:
+    defaults:
+      run:
+        shell: bash
+        
     name: Terraform Apply Simulation
     needs:
       - terraform-plan
