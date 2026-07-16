@@ -6,217 +6,70 @@ on:
 
 jobs:
 
-
 ####################################################
 # PLAN STAGE
 ####################################################
 
-
   terraform-plan:
-
-
     name: Terraform Plan Simulation
-
-
-    runs-on: ubuntu-latest
-
-
+    runs-on: ci
     steps:
-
-
       - name: Checkout repository
-
         uses: actions/checkout@v4
-
-
-
-      - name: Simulate Terraform Init
-
+      - name: Terraform Init
         run: |
-
           echo "================================"
-
           echo "Terraform Init"
-
           echo "================================"
-
           echo "terraform init completed"
 
-
-
       - name: Simulate Terraform Plan
-
         run: |
-
           echo "================================"
-
           echo "Terraform Plan"
-
           echo "================================"
-
-
-          echo "Checking infrastructure changes..."
-
-          echo ""
-
-          echo "Plan:"
-
-          echo "+ Create AWS EC2 Instance"
-
-          echo "+ Create Security Group"
-
-          echo "+ Create IAM Role"
-
-          echo ""
-
           echo "Terraform plan completed successfully"
-
-
-
-      - name: Create Dummy Plan File
-
-
-        run: |
-
-
           echo "terraform-plan-for-dev" > tfplan.txt
 
-
-
       - name: Upload Plan Artifact
-
-
         uses: actions/upload-artifact@v4
-
-
         with:
-
-
           name: terraform-plan-dev
-
-
           path: tfplan.txt
-
-
-
 
 ####################################################
 # APPROVAL + APPLY STAGE
 ####################################################
 
-
   terraform-apply:
-
-
     name: Terraform Apply Simulation
-
-
     needs:
-
-
       - terraform-plan
-
-
-
-    runs-on: ubuntu-latest
-
-
+    runs-on: ci
 
     # THIS CREATES THE MANUAL APPROVAL GATE
 
     environment:
-
-
       name: Dev
-
-
-
     steps:
-
-
-
       - name: Checkout repository
-
-
         uses: actions/checkout@v4
 
-
-
-
       - name: Download Plan Artifact
-
-
-
         uses: actions/download-artifact@v4
-
-
-
         with:
-
-
-
           name: terraform-plan-dev
 
-
-
-
-
-
       - name: Show Approved Plan
-
-
-
         run: |
-
-
-
           echo "================================"
-
           echo "Approved Terraform Plan"
-
           echo "================================"
-
-
-
           cat tfplan.txt
 
-
-
-
-
-
       - name: Simulate Terraform Apply
-
-
-
         run: |
-
-
-
           echo "================================"
-
           echo "Terraform Apply"
-
           echo "================================"
-
-
-
-          echo "Applying approved infrastructure changes..."
-
-
-
-          echo ""
-
-          echo "Creating resources..."
-
-          echo "EC2 Instance created"
-
-          echo "Security Group created"
-
-          echo "IAM Role created"
-
-
-
-          echo ""
-
           echo "Terraform apply completed successfully"
