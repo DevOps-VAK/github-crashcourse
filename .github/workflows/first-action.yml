@@ -2,7 +2,7 @@ name: Terraform Approval Gate Test
 
 on:
   push:
-    
+
 
 jobs:
 
@@ -79,7 +79,7 @@ jobs:
         run: |
 
 
-          echo "terraform-plan-for-${{ inputs.environment }}" > tfplan.txt
+          echo "terraform-plan-for-dev" > tfplan.txt
 
 
 
@@ -92,7 +92,7 @@ jobs:
         with:
 
 
-          name: terraform-plan-${{ inputs.environment }}
+          name: terraform-plan-dev
 
 
           path: tfplan.txt
@@ -155,7 +155,7 @@ jobs:
 
 
 
-          name: terraform-plan-${{ inputs.environment }}
+          name: terraform-plan-dev
 
 
 
