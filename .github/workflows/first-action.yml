@@ -1,32 +1,8 @@
 name: Terraform Approval Gate Test
 
-
 on:
-
-  workflow_dispatch:
-
-    inputs:
-
-      environment:
-
-        description: "Choose environment"
-
-        required: true
-
-        type: choice
-
-        options:
-
-          - Dev
-          - Prod
-
-
-
-permissions:
-
-  contents: read
-
-
+  push:
+    
 
 jobs:
 
@@ -151,7 +127,7 @@ jobs:
     environment:
 
 
-      name: ${{ inputs.environment }}
+      name: Dev
 
 
 
